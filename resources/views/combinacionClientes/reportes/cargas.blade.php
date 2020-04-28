@@ -111,7 +111,7 @@
             
                 @foreach($grupos as $grupo)
                 <tr>
-                    <td>{{ptional($grupo->plantel)->razon}}</td><td>{{$grupo->id}}</td><td>{{$grupo->name}}</td><td>{{$grupo->desc_corta}}</td>
+                    <td>{{optional($grupo->plantel)->razon}}</td><td>{{$grupo->id}}</td><td>{{$grupo->name}}</td><td>{{$grupo->desc_corta}}</td>
                 <td>{{optional($grupo->salon)->name}}</td>
                 </tr>
                 @endforeach

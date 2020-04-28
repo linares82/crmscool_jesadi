@@ -2,10 +2,12 @@
                     <div class="form-group col-md-4 @if($errors->has('monto_calculado')) has-error @endif">
                        <label for="monto_calculado-field">Monto Calculado</label>
                        {!! Form::text("monto_calculado", $suma_pagos-$suma_egresos, array("class" => "form-control", "id" => "monto_calculado-field", 'readonly'=>true)) !!}
+                       {!! Form::hidden("plantel_id", $plantel, array("class" => "form-control", "id" => "plantel_id-field")) !!}
                        @if($errors->has("monto_calculado"))
                         <span class="help-block">{{ $errors->first("monto_calculado") }}</span>
                        @endif
                     </div>
+
                     <div class="form-group col-md-4 @if($errors->has('monto_real')) has-error @endif">
                        <label for="monto_real-field">Monto Real</label>
                        {!! Form::text("monto_real", null, array("class" => "form-control", "id" => "monto_real-field")) !!}

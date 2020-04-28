@@ -987,6 +987,7 @@ class ComposerStaticInit94ee770e675e3957b9a5767755ac4657
         'CreateMenusTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_22_171620_create_menus_table.php',
         'CreateMeseTable' => __DIR__ . '/../..' . '/database/migrations/2019_02_11_134316_create_mese_table.php',
         'CreateModulosTable' => __DIR__ . '/../..' . '/database/migrations/2017_12_08_135311_create_modulos_table.php',
+        'CreateMoodleBajasTable' => __DIR__ . '/../..' . '/database/migrations/2020_04_15_174627_create_moodle_bajas_table.php',
         'CreateMovimientosTable' => __DIR__ . '/../..' . '/database/migrations/2019_09_12_155530_create_movimientos_table.php',
         'CreateMueblesTable' => __DIR__ . '/../..' . '/database/migrations/2019_10_03_110111_create_muebles_table.php',
         'CreateMunicipiosTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_30_224335_create_municipios_table.php',

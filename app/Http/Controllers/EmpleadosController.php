@@ -124,12 +124,18 @@ class EmpleadosController extends Controller
     public function edit($id, Empleado $empleado, PivotDocEmpleado $pivotDocEmpleado)
     {
         $empleado = $empleado->find($id);
+        $planteles = array();
+        foreach ($empleado->plantels as $p) {
+            //dd($p->id);
+            array_push($planteles, $p->id);
+        }
         if ($empleado->cve_empleado == "") {
             $empleado->cve_empleado = substr(Hash::make(rand(0, 1000)), 2, 8);
         }
         $jefes = Empleado::select('id', DB::raw('concat(nombre," ",ape_paterno," ",ape_materno) as name'))
             ->where('jefe_bnd', '=', '1')
-            ->where('plantel_id', '=', $empleado->plantel_id)
+            //->where('plantel_id', '=', $empleado->plantel_id)
+            ->whereIn('plantel_id', $planteles)
             ->pluck('name', 'id');
         $responsables = Empleado::select('empleados.id', DB::raw('concat(empleados.nombre," ",empleados.ape_paterno," ",empleados.ape_materno) as name'))
             ->join('puestos as p', 'p.id', '=', 'empleados.puesto_id')
@@ -170,12 +176,19 @@ class EmpleadosController extends Controller
     public function duplicate($id, Empleado $empleado)
     {
         $empleado = $empleado->find($id);
+
+        $planteles = array();
+        foreach ($empleado->plantels as $p) {
+            //dd($p->id);
+            array_push($planteles, $p->id);
+        }
         $jefes = Empleado::select('id', DB::raw('concat(nombre," ",ape_paterno," ",ape_materno) as name'))
             ->where('jefe_bnd', '=', '1')
             //->where('plantel_id', '=', $plantel)
             ->pluck('name', 'id');
         $responsables = Empleado::select('id', DB::raw('concat(nombre," ",ape_paterno," ",ape_materno) as name'))
-            ->where('plantel_id', '=', $empleado->plantel_id)
+            //->where('plantel_id', '=', $empleado->plantel_id)
+            ->whereIn('plantel_id', $planteles)
             ->pluck('name', 'id');
         $doc_existentes = DB::table('pivot_doc_empleados as pde')->select('doc_empleado_id')
             ->join('empleados as e', 'e.id', '=', 'pde.empleado_id')

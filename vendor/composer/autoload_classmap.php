@@ -234,6 +234,7 @@ return array(
     'CreateMenusTable' => $baseDir . '/database/migrations/2017_03_22_171620_create_menus_table.php',
     'CreateMeseTable' => $baseDir . '/database/migrations/2019_02_11_134316_create_mese_table.php',
     'CreateModulosTable' => $baseDir . '/database/migrations/2017_12_08_135311_create_modulos_table.php',
+    'CreateMoodleBajasTable' => $baseDir . '/database/migrations/2020_04_15_174627_create_moodle_bajas_table.php',
     'CreateMovimientosTable' => $baseDir . '/database/migrations/2019_09_12_155530_create_movimientos_table.php',
     'CreateMueblesTable' => $baseDir . '/database/migrations/2019_10_03_110111_create_muebles_table.php',
     'CreateMunicipiosTable' => $baseDir . '/database/migrations/2017_03_30_224335_create_municipios_table.php',

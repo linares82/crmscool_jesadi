@@ -75,6 +75,9 @@
                 <div class="col-md-4">
                     <a class='btn btn-sm btn-warning' target='_blank' href="{{route('cajas.adeudosXplantel')}}"> Ver Adeudos</a>
                 </div>
+                <div class="col-md-4">
+                    <a class='btn btn-sm btn-warning' target='_blank' href="{{route('cajas.moodleAdeudosXplantel')}}"> Moodle</a>
+                </div>
             
             </div>
         </div>
@@ -88,13 +91,16 @@
                 
             </div>
             <div class="box-body">
+                {!! Form::open(array('route' => 'cajaCortes.create', 'id'=>'frmCorte')) !!}
+                    {!! Form::select("plantel_id", $list["Plantel"], null, array("class" => "form-control select_seguridad", "id" => "plantel_id-field")) !!}
+
                 @permission('cajaCortes.create')
-                    <a class='btn btn-sm btn-success' target='_blank' href="{{route('cajaCortes.create')}}">Corte de Caja</a>
+                    <button type="submit" class="btn btn-sm btn-success">Corte de Caja</button>
                 @endpermission
                 @permission('cajaCortes.index')
-                    <a class='btn btn-sm btn-success' target='_blank' href="{{route('cajaCortes.index')}}">Historia</a>
+                    <button type="submit" class="btn btn-sm btn-success" id="historiaCortesPlantel">Historia</button>
                 @endpermission
-                
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -1007,7 +1013,16 @@ Agregar nuevo registro
         $('#btnCrearVenta').prop('disabled', true);
         $('#frmCrearVenta').submit();
     });
+
     
+
+    $('#historiaCortesPlantel').click(function(e) {
+        e.preventDefault();
+        
+        let form = $('#frmCorte');
+        form.attr('action',"{{route('cajaCortes.index')}}");
+        form.submit();
+    });
 
 </script>
 

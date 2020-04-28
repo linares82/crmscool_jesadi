@@ -14,10 +14,11 @@ class EmpleadoObserver
      * @param  User  $user
      * @return void
      */
-     public $empleado;
+    public $empleado;
     public function creating(Empleado $empleado)
     {
         //dd("hi fil");
+        /*
         $mes=date('m');
         $year=date('y');
         $cadena0="00000";
@@ -30,6 +31,7 @@ class EmpleadoObserver
         $str=substr($cadena0, 0, strlen($cadena0)- strlen($plantel->cns_empleado));
 
         $this->empleado->cve_empleado=$mes.$year.$plantel->cve_plantel.$str.$plantel->cns_empleado;
+        */
     }
 
     /**

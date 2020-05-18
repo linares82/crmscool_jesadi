@@ -17,13 +17,13 @@
         <h3>Consulta de eventos de Bajas del {{$datos['fecha_f']}} al {{$datos['fecha_t']}}</h3>
         <table class="table table-condensed table-striped">
             <thead>
-                <th>Plantel</th><th>Alumno</th><th>Fecha</th><th>Estatus</th><th>Tel. Cel.</th><th>Descripción</th><th>Inscripciones Activas</th>
+                <th>Plantel</th><th>Especialidad</th><th>Alumno</th><th>Fecha</th><th>Estatus</th><th>Tel. Cel.</th><th>Descripción</th><th>Inscripciones Activas</th>
             </thead>
             <tbody>
                 <?php $cont=0; ?>
                 @foreach($registros as $registro)
                 <tr>
-                    <td>{{ $registro->razon }}</td><td>{{$registro->cliente."-".$registro->nombre." ".$registro->ape_paterno." ".$registro->ape_materno}}</td>
+                    <td>{{ $registro->razon }}</td><td>{{ $registro->especialidad }}</td><td>{{$registro->cliente."-".$registro->nombre." ".$registro->ape_paterno." ".$registro->ape_materno}}</td>
                     <td>{{$registro->fecha}}</td><td>{{$registro->estatus}}</td><td>{{$registro->tel_cel}}</td><td>{{$registro->descripcion}}</td>
                     @php
                       $cuenta_inscripciones=\App\Inscripcion::where('cliente_id',$registro->cliente)

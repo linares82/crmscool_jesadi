@@ -1567,6 +1567,7 @@ class ClientesController extends Controller
         //                        ->where('stc.id','<=',$datos['estatus_t'])
         //                        ->get();
         $historia_clientes = HistoriaCliente::select(
+            'e.name as especialidad',
             'c.id as cliente',
             'c.nombre',
             'c.nombre2',
@@ -1579,6 +1580,8 @@ class ClientesController extends Controller
             'c.tel_cel'
         )
             ->join('clientes as c', 'c.id', '=', 'historia_clientes.cliente_id')
+            ->join('inscripcions as i', 'i.cliente_id', '=', 'c.id')
+            ->join('especialidads as e', 'e.id', '=', 'i.especialidad_id')
             ->join('plantels as p', 'p.id', '=', 'c.plantel_id')
             ->join('st_clientes as stc', 'stc.id', '=', 'c.st_cliente_id')
             ->whereDate('fecha', '>=', $datos['fecha_f'])

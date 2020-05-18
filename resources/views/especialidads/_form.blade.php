@@ -55,6 +55,20 @@
                                 <span class="help-block">{{ $errors->first("abreviatura") }}</span>
                                @endif
                             </div>
+                            <div class="form-group col-md-4 @if($errors->has('modulos')) has-error @endif">
+                                <label for="modulos-field">Modulos</label>
+                                {!! Form::text("modulos", null, array("class" => "form-control input-sm", "id" => "modulos-field")) !!}
+                                @if($errors->has("modulos"))
+                                 <span class="help-block">{{ $errors->first("modulos") }}</span>
+                                @endif
+                             </div>
+                             <div class="form-group col-md-4 @if($errors->has('duracion')) has-error @endif">
+                                <label for="duracion-field">Duracion</label>
+                                {!! Form::text("duracion", null, array("class" => "form-control input-sm", "id" => "duracion-field")) !!}
+                                @if($errors->has("duracion"))
+                                 <span class="help-block">{{ $errors->first("duracion") }}</span>
+                                @endif
+                             </div>
                             @if(isset($especialidad))
                             <input type="hidden" name="_token" id="_token"  value="<?= csrf_token(); ?>"> 
                             <div class="form-group col-md-4">

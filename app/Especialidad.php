@@ -23,7 +23,7 @@ class Especialidad extends Model
 	protected $fillable = [
 		'name', 'rvoe', 'ccte', 'plantel_id', 'usu_alta_id', 'usu_mod_id', 'meta', 'vencimiento_rvoe',
 		'bnd_usar_lectivo', 'f_inicio', 'f_fin', 'lectivo_id', 'imagen', 'imagen_anterior',
-		'abreviatura', 'fondo_credencial'
+		'abreviatura', 'fondo_credencial', 'modulos', 'duracion'
 	];
 
 	public function usu_alta()

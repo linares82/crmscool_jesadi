@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td align="center">ACUERDOS  DE  DGCFT  No. {{ $inscripcion->especialidad->rvoe }} {{ $inscripcion->grado->name }} DE FECHA {{ $inicio->format('d-m-Y') }} Y FINALIZARA EL DIA {{ $fin->format('d-m-Y') }} </td>
             </tr>
             <TR>
-                <td align="center">CCT: {{ $inscripcion->ccte }} {{ $inscripcion->especialidad->name }}</td>
+                <td align="center">CCT: {{ $inscripcion->especialidad->ccte }}</td>
             </TR>
         </table>
         

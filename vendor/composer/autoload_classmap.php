@@ -213,6 +213,7 @@ return array(
     'CreateGruposTable' => $baseDir . '/database/migrations/2017_08_17_165652_create_grupos_table.php',
     'CreateHAsistenciaRsTable' => $baseDir . '/database/migrations/2020_03_03_130231_create_h_asistencia_rs_table.php',
     'CreateHCalifPonderacionsTable' => $baseDir . '/database/migrations/2020_03_03_133812_create_h_calif_ponderacions_table.php',
+    'CreateHCalificacionsTable' => $baseDir . '/database/migrations/2020_05_18_163524_create_h_calificacions_table.php',
     'CreateHCuentasEfectivosTable' => $baseDir . '/database/migrations/2019_06_26_101826_create_h_cuentas_efectivos_table.php',
     'CreateHEstatusesTable' => $baseDir . '/database/migrations/2019_07_29_094034_create_h_estatuses_table.php',
     'CreateHacademicasTable' => $baseDir . '/database/migrations/2017_09_18_170010_create_hacademicas_table.php',

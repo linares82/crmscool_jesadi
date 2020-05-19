@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\CalificacionPonderacion;
+use App\HCalificacion;
 use App\HCalifPonderacion;
 
 class CalificacionPonderacionObserver
@@ -70,5 +71,25 @@ class CalificacionPonderacionObserver
         $input['usu_mod_id'] = $calificacionPonderacion->usu_mod_id;
         //dd($input);
         HCalifPonderacion::create($input);
+
+        $anterior = CalificacionPonderacion::find($calificacionPonderacion->id);
+
+        //llena historial
+
+        $this->hCalificacions($anterior, $calificacionPonderacion);
+    }
+
+    public function hCalificacions($anterior, $nuevo)
+    {
+        //dd($anterior->id);
+        $input['cliente_id'] = $anterior->calificacion->hacademica->cliente_id;
+        $input['calificacion_id'] = $anterior->calificacion_id;
+        $input['calificacion_ponderacion_id'] = $anterior->id;
+        $input['carga_ponderacion_id'] = $anterior->carga_ponderacion_id;
+        $input['calificacion_parcial_anterior'] = $anterior->calificacion_parcial;
+        $input['calificacion_parcial_actual'] = $nuevo->calificacion_parcial;
+        $input['usu_alta_id'] = $nuevo->usu_alta_id;
+        $input['usu_mod_id'] = $nuevo->usu_mod_id;
+        HCalificacion::create($input);
     }
 }

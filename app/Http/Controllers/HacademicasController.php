@@ -661,13 +661,7 @@ class HacademicasController extends Controller
 
         //Calcula la calificacion en la tabla de calificaciones
         $suma = $this->calculoCalificacionTotal($calificacion_ponderacion->calificacion_id);
-        /*$ponderaciones= CalificacionPonderacion::where('calificacion_id',$calificacion_ponderacion->calificacion_id)->get();
-        $suma=0;
 
-        //dd($ponderaciones->toArray());
-        foreach($ponderaciones as $ponderacion){
-            $suma=$suma+$ponderacion->calificacion_parcial_calculada;
-        }*/
         //dd($suma);
         //dd($calificacion_ponderacion->calificacion_id);
         $calificacion = Calificacion::find($calificacion_ponderacion->calificacion_id);

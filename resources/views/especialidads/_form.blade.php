@@ -28,7 +28,7 @@
                                @endif
                             </div>
                             <div class="form-group col-md-4 @if($errors->has('vencimiento_rvoe')) has-error @endif">
-                               <label for="vencimiento_rvoe-field">Vencimiento RVOE</label>
+                               <label for="vencimiento_rvoe-field">De Fecha RVOE</label>
                                {!! Form::text("vencimiento_rvoe", null, array("class" => "form-control input-sm", "id" => "vencimiento_rvoe-field")) !!}
                                @if($errors->has("vencimiento_rvoe"))
                                 <span class="help-block">{{ $errors->first("rvoe") }}</span>

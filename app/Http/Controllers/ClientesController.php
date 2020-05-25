@@ -1568,6 +1568,7 @@ class ClientesController extends Controller
         //                        ->get();
         $historia_clientes = HistoriaCliente::select(
             'e.name as especialidad',
+            'e.name as grupo',
             'c.id as cliente',
             'c.nombre',
             'c.nombre2',
@@ -1582,6 +1583,7 @@ class ClientesController extends Controller
             ->join('clientes as c', 'c.id', '=', 'historia_clientes.cliente_id')
             ->join('inscripcions as i', 'i.cliente_id', '=', 'c.id')
             ->join('especialidads as e', 'e.id', '=', 'i.especialidad_id')
+            ->join('grupos as g', 'g.id', '=', 'i.grupo_id')
             ->join('plantels as p', 'p.id', '=', 'c.plantel_id')
             ->join('st_clientes as stc', 'stc.id', '=', 'c.st_cliente_id')
             ->whereDate('fecha', '>=', $datos['fecha_f'])
@@ -1589,6 +1591,7 @@ class ClientesController extends Controller
             ->where('evento_cliente_id', 2)
             ->where('p.id', '>=', $datos['plantel_f'])
             ->where('p.id', '<=', $datos['plantel_t'])
+            ->whereNull('i.deleted_at')
             ->orderBy('p.id')
             ->orderBy('c.id')
             ->get();

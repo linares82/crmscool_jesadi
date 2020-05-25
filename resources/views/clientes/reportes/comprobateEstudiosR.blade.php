@@ -28,6 +28,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @php
             $inicio=Carbon\Carbon::createFromFormat('Y-m-d', $inscripcion->lectivo->inicio);
             $fin=Carbon\Carbon::createFromFormat('Y-m-d', $inscripcion->lectivo->fin);   
+            $vencimiento=Carbon\Carbon::createFromFormat('Y-m-d', $inscripcion->especialidad->vencimiento_rvoe);   
+            
     @endphp
     <body style="margin:10px;padding:5px;">
         <table width="100%">
@@ -38,7 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <td align="center">{{ $cliente->plantel->razon }}</td>
             </tr>
             <tr>
-                <td align="center">ACUERDOS  DE  DGCFT  No. {{ $inscripcion->especialidad->rvoe }} {{ $inscripcion->grado->name }} DE FECHA {{ $inicio->format('d-m-Y') }} Y FINALIZARA EL DIA {{ $fin->format('d-m-Y') }} </td>
+                <td align="center">ACUERDOS  DE  DGCFT  No. {{ $inscripcion->especialidad->rvoe }} DE FECHA {{ $vencimiento->format('d-m-Y') }} </td>
             </tr>
             <TR>
                 <td align="center">CCT: {{ $inscripcion->especialidad->ccte }}</td>
@@ -50,9 +52,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         P R E S E N T E    
         <br/><br/><br/>
         <p >
-            Por medio del Presente se informa que el C. {{ $cliente->nombre }} {{ $cliente->nombre2 }} 
+            Por medio de la Presente se informa que el C. {{ $cliente->nombre }} {{ $cliente->nombre2 }} 
             {{ $cliente->ape_paterno }} {{ $cliente->ape_materno }}, es alumno activo de la 
-            Especialidad en {{ $inscripcion->periodo_estudio->name }}, 
+            Especialidad en {{ $inscripcion->grado->name }}, 
             misma que tiene duracion de {{ $inscripcion->especialidad->duracion }}, dividida en {{ $inscripcion->especialidad->modulos }} 
             de los cuales cursa el {{ $inscripcion->periodo_estudio->name }} en el horario {{ $inscripcion->turno->name }}, 
             cabe hacer mencion que el modulo inicio el dia {{ $inicio->format('d-m-Y') }} y finalizara el dia {{ $fin->format('d-m-Y') }}.

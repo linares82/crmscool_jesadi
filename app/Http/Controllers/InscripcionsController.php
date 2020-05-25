@@ -126,6 +126,8 @@ class InscripcionsController extends Controller
         }
         //dd($materias);
         $materias_validar = Hacademica::where('grupo_id', '=', $i->grupo_id)
+            ->join('inscripcions as i', 'i.id', '=', 'hacademicas.inscripcion_id')
+            ->whereNull('i.deleted_at')
             ->where('cliente_id', '=', $i->cliente_id)
             ->where('grado_id', '=', $i->grado_id)
             ->where('lectivo_id', '=', $i->lectivo_id)

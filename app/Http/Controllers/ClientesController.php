@@ -1568,7 +1568,7 @@ class ClientesController extends Controller
         //                        ->get();
         $historia_clientes = HistoriaCliente::select(
             'e.name as especialidad',
-            'e.name as grupo',
+            'g.name as grupo',
             'c.id as cliente',
             'c.nombre',
             'c.nombre2',

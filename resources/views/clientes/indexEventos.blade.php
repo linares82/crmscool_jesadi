@@ -259,10 +259,11 @@
                                     @permission('seguimientos.show')
                                     <a class="btn btn-xs btn-default" href="{{ route('seguimientos.show', $cliente->cliente->id) }}"><i class="glyphicon glyphicon-edit"></i> Seguimiento</a>
                                     @endpermission
-                                    foreach ($empleado->plantels as $p) {
+                                    @php foreach ($empleado->plantels as $p) {
                                         //dd($p->id);
                                         array_push($planteles, $p->id);
                                     }
+                                    @endphp
                                     @endphp
                                     @if(array_search($cliente->cliente->plantel_id, $plantels)<>false) //$cliente->cliente->plantel_id==$empleado->plantel_id)
                                     @permission('clientes.edit')

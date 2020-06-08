@@ -82,14 +82,16 @@ class CalificacionPonderacionObserver
     public function hCalificacions($anterior, $nuevo)
     {
         //dd($anterior->id);
-        $input['cliente_id'] = $anterior->calificacion->hacademica->cliente_id;
-        $input['calificacion_id'] = $anterior->calificacion_id;
-        $input['calificacion_ponderacion_id'] = $anterior->id;
-        $input['carga_ponderacion_id'] = $anterior->carga_ponderacion_id;
-        $input['calificacion_parcial_anterior'] = $anterior->calificacion_parcial;
-        $input['calificacion_parcial_actual'] = $nuevo->calificacion_parcial;
-        $input['usu_alta_id'] = $nuevo->usu_alta_id;
-        $input['usu_mod_id'] = $nuevo->usu_mod_id;
-        HCalificacion::create($input);
+        if ($nuevo->calificacion_parcial <> $anterior->calificacion_parcial) {
+            $input['cliente_id'] = $anterior->calificacion->hacademica->cliente_id;
+            $input['calificacion_id'] = $anterior->calificacion_id;
+            $input['calificacion_ponderacion_id'] = $anterior->id;
+            $input['carga_ponderacion_id'] = $anterior->carga_ponderacion_id;
+            $input['calificacion_parcial_anterior'] = $anterior->calificacion_parcial;
+            $input['calificacion_parcial_actual'] = $nuevo->calificacion_parcial;
+            $input['usu_alta_id'] = $nuevo->usu_alta_id;
+            $input['usu_mod_id'] = $nuevo->usu_mod_id;
+            HCalificacion::create($input);
+        }
     }
 }

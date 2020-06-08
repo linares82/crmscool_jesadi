@@ -28,7 +28,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @php
             $inicio=Carbon\Carbon::createFromFormat('Y-m-d', $inscripcion->lectivo->inicio);
             $fin=Carbon\Carbon::createFromFormat('Y-m-d', $inscripcion->lectivo->fin);   
-            $vencimiento=Carbon\Carbon::createFromFormat('Y-m-d', $inscripcion->especialidad->vencimiento_rvoe);   
+            if(!is_null($inscripcion->especialidad->vencimiento_rvoe)){
+                $vencimiento=Carbon\Carbon::createFromFormat('Y-m-d', $inscripcion->especialidad->vencimiento_rvoe);   
+            }
+            
+            
             
     @endphp
     <body style="margin:10px;padding:5px;">
@@ -39,9 +43,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <tr>
                 <td align="center">{{ $cliente->plantel->razon }}</td>
             </tr>
+            @if($inscripcion->especialidad->rvoe<>"")
             <tr>
-                <td align="center">ACUERDOS  DE  DGCFT  No. {{ $inscripcion->especialidad->rvoe }} DE FECHA {{ $vencimiento->format('d-m-Y') }} </td>
+                <td align="center">ACUERDOS  DE  DGCFT  No. {{ optional($inscripcion->especialidad)->rvoe }} DE FECHA {{ optional($vencimiento->format('d-m-Y')) }} </td>
             </tr>
+            @endif
             <TR>
                 <td align="center">CCT: {{ $inscripcion->especialidad->ccte }}</td>
             </TR>
@@ -53,7 +59,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <br/><br/><br/>
         <p >
             Por medio de la Presente se informa que el C. {{ $cliente->nombre }} {{ $cliente->nombre2 }} 
-            {{ $cliente->ape_paterno }} {{ $cliente->ape_materno }}, es alumno activo de la 
+            {{ $cliente->ape_paterno }} {{ $cliente->ape_materno }}, es alumno {{ $cliente->stCliente->name }} de la 
             Especialidad en {{ $inscripcion->grado->name }}, 
             misma que tiene duracion de {{ $inscripcion->especialidad->duracion }}, dividida en {{ $inscripcion->especialidad->modulos }} 
             de los cuales cursa el {{ $inscripcion->periodo_estudio->name }} en el horario {{ $inscripcion->turno->name }}, 

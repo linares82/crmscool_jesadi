@@ -344,7 +344,7 @@
                                     <th></th>
                                 </thead>
                                 <tbody>
-                                    @foreach($cliente->combinaciones as $c)
+                                    @foreach(optional($cliente)->combinaciones as $c)
                                     @if($c->especialidad_id<>0 and $c->nivel_id<>0 and $c->grado_id<>0)
                                     <tr>
                                         <td>
@@ -367,7 +367,9 @@
                                         </td>
                                         <td>
                                             {{optional($c->turno)->name}}  
+                                            @permission('planPagos.show')
                                             <a href={{ route('planPagos.show',optional($c->planPago)->id) }} target="_blank" class="btn btn-xs btn-warning">Ver Plan</a>
+                                            @endpermission
                                         </td>
                                         <td>
                                         @if($c->bnd_inscrito==1)  
@@ -394,8 +396,11 @@
                                             <div id='loading33' style='display: none'><img src="{{ asset('images/ajax-loader.gif') }}" title="Enviando" /></div> 
                                         </td>
                                         <td>
+                                            @permission('combinacionClientes.destroy')
+                                            <a href="{!! route('combinacionClientes.destroy', $c->id) !!}" class="btn btn-xs btn-block btn-danger">Eliminar</a>
+                                            @endpermission
                                             @permission('inscripcions.create') 
-                                                <a href="{!! route('combinacionClientes.destroy', $c->id) !!}" class="btn btn-xs btn-block btn-danger">Eliminar</a>
+                                                
                                                 
                                                 @if($cliente->seguimiento->st_seguimiento_id==2)
                                                 <button class="inscribir-create btn btn-primary btn-xs" data-cliente_id="{{$c->cliente_id}}"

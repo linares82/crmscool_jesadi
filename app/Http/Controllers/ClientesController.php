@@ -1845,7 +1845,10 @@ class ClientesController extends Controller
         $input['usu_alta_id'] = Auth::user()->id;
         $input['usu_mod_id'] = Auth::user()->id;
         $token = ImpresionComprobanteE::create($input);
+        $foto_aux = $cliente->pivotDocCliente->where('doc_alumno_id', 11)->first();
+        $foto = end(explode('/', $foto_aux->archivo));
+        //dd($foto);
 
-        return view('clientes.reportes.comprobateEstudiosR', compact('cliente', 'inscripcion', 'token'));
+        return view('clientes.reportes.comprobateEstudiosR', compact('cliente', 'inscripcion', 'token', 'foto'));
     }
 }

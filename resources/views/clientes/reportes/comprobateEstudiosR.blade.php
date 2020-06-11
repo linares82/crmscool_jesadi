@@ -38,14 +38,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <body style="margin:10px;padding:5px;">
         <table width="100%">
             <tr>
-                <td> <img src="{{asset('storage/especialidads/'.$inscripcion->especialidad->imagen)}}" alt="Logo" height="25%" width="25%" > </td>
+                <td> 
+                    <img src="{{asset('storage/especialidads/'.$inscripcion->especialidad->imagen)}}" alt="Logo" height="25%" width="25%" > 
+                </td>
+                <td align="right"> 
+                    <img src="{{asset('imagenes/clientes/'.$cliente->id."/".$foto)}}" alt="Foto" height="25%" width="25%" > </td>
+                </td>
             </tr>
             <tr>
                 <td align="center">{{ $cliente->plantel->razon }}</td>
             </tr>
             @if($inscripcion->especialidad->rvoe<>"")
             <tr>
-                <td align="center">ACUERDOS  DE  DGCFT  No. {{ optional($inscripcion->especialidad)->rvoe }} DE FECHA {{ optional($vencimiento->format('d-m-Y')) }} </td>
+                <td align="center">ACUERDOS  DE  DGCFT  No. {{ optional($inscripcion->especialidad)->rvoe }} DE FECHA {{ $vencimiento->format('d-m-Y') }} </td>
             </tr>
             @endif
             <TR>

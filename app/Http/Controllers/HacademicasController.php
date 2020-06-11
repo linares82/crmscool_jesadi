@@ -701,11 +701,20 @@ class HacademicasController extends Controller
             $g = Grado::find($hacademica->grado_id)->first();
             //dd($g->toArray());
             if ($tpo_examen_id == 2 and $g->name == "BACHILLERATO") {
-                $carga_ponderaciones = CargaPonderacion::where('ponderacion_id', '=', 1)->where('tiene_detalle', '=', 0)->get();
+                $carga_ponderaciones = CargaPonderacion::where('ponderacion_id', '=', 1)
+                    ->where('tiene_detalle', '=', 0)
+                    ->where('bnd_activo', 1)
+                    ->get();
             } elseif ($tpo_examen_id == 2 and $g->name <> "BACHILLERATO") {
-                $carga_ponderaciones = CargaPonderacion::where('ponderacion_id', '=', 2)->where('tiene_detalle', '=', 0)->get();
+                $carga_ponderaciones = CargaPonderacion::where('ponderacion_id', '=', 2)
+                    ->where('tiene_detalle', '=', 0)
+                    ->where('bnd_activo', 1)
+                    ->get();
             } elseif ($tpo_examen_id == 1) {
-                $carga_ponderaciones = CargaPonderacion::where('ponderacion_id', '=', $materia->ponderacion_id)->where('tiene_detalle', '=', 0)->get();
+                $carga_ponderaciones = CargaPonderacion::where('ponderacion_id', '=', $materia->ponderacion_id)
+                    ->where('tiene_detalle', '=', 0)
+                    ->where('bnd_activo', 1)
+                    ->get();
             }
 
             //dd($carga_ponderaciones->toArray());

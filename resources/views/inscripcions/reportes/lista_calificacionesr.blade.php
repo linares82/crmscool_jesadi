@@ -1,58 +1,6 @@
 <html>
     <head>
         <style>
-/*            @media print {
-                table {
-                    font-family: arial, sans-serif;
-                    border-collapse: collapse;
-                    width: 100%;
-                    font-size: 9px;
-                }
-
-                td, th {
-                    border: 1px solid #dddddd;
-                    text-align: left;
-                    padding: 10px;
-                }
-
-                tr:nth-child(even) {
-                    background-color: #dddddd;
-                }
-            }
- 
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-                font-size: 8px;
-            }
-
-            td th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-            
-            .altura {
-                height: 100px;
-            }
-            
-            .girar_texto {
-                
-                text-align: center;
-                padding: 8px;
-                transform: rotate(270deg);
-                height: auto;
-                
-            }
-            
-            .centrar_texto {
-                text-align: center;
-                padding: 8px;
-            }
-            tr:nth-child(even) {
-                background-color: #dddddd;
-            }*/
       
         h1, h3, h5, th { text-align: center; }
         table, #chart_div { margin: auto; font-family: Segoe UI; border: thin ridge grey; }

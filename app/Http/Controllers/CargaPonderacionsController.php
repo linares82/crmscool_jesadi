@@ -12,18 +12,20 @@ use App\Http\Requests\updateCargaPonderacion;
 use App\Http\Requests\createCargaPonderacion;
 use DB;
 
-class CargaPonderacionsController extends Controller {
+class CargaPonderacionsController extends Controller
+{
 
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $cargaPonderacions = CargaPonderacion::getAllData($request);
-        $ponderaciones= Ponderacion::pluck('name','id');
-        return view('cargaPonderacions.index', compact('cargaPonderacions','ponderaciones'))
-                ->with('list', CargaPonderacion::getListFromAllRelationApps());
+        $ponderaciones = Ponderacion::pluck('name', 'id');
+        return view('cargaPonderacions.index', compact('cargaPonderacions', 'ponderaciones'))
+            ->with('list', CargaPonderacion::getListFromAllRelationApps());
     }
 
     /**
@@ -31,12 +33,13 @@ class CargaPonderacionsController extends Controller {
      *
      * @return Response
      */
-    public function create() {
-        $padre= CargaPonderacion::where('tiene_detalle',1)->pluck('name','id');
-        $ponderaciones=Ponderacion::pluck('name','id');
-        $padre->prepend('Seleccionar opcion','0');
-        return view('cargaPonderacions.create', compact('ponderaciones','padre'))
-                        ->with('list', CargaPonderacion::getListFromAllRelationApps());
+    public function create()
+    {
+        $padre = CargaPonderacion::where('tiene_detalle', 1)->pluck('name', 'id');
+        $ponderaciones = Ponderacion::pluck('name', 'id');
+        $padre->prepend('Seleccionar opcion', '0');
+        return view('cargaPonderacions.create', compact('ponderaciones', 'padre'))
+            ->with('list', CargaPonderacion::getListFromAllRelationApps());
     }
 
     /**
@@ -45,17 +48,23 @@ class CargaPonderacionsController extends Controller {
      * @param Request $request
      * @return Response
      */
-    public function store(createCargaPonderacion $request) {
+    public function store(createCargaPonderacion $request)
+    {
 
         $input = $request->all();
         $input['usu_alta_id'] = Auth::user()->id;
         $input['usu_mod_id'] = Auth::user()->id;
-        if(isset($input['tiene_detalle'])){
-            $input['tiene_detalle']=1;
-        }else{
-            $input['tiene_detalle']=0;
+        if (isset($input['tiene_detalle'])) {
+            $input['tiene_detalle'] = 1;
+        } else {
+            $input['tiene_detalle'] = 0;
         }
-        
+        if (isset($input['bnd_activo'])) {
+            $input['bnd_activo'] = 1;
+        } else {
+            $input['bnd_activo'] = 0;
+        }
+
         //create data
         CargaPonderacion::create($input);
 
@@ -68,7 +77,8 @@ class CargaPonderacionsController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function show($id, CargaPonderacion $cargaPonderacion) {
+    public function show($id, CargaPonderacion $cargaPonderacion)
+    {
         $cargaPonderacion = $cargaPonderacion->find($id);
         return view('cargaPonderacions.show', compact('cargaPonderacion'));
     }
@@ -79,14 +89,15 @@ class CargaPonderacionsController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id, CargaPonderacion $cargaPonderacion) {
+    public function edit($id, CargaPonderacion $cargaPonderacion)
+    {
         $cargaPonderacion = $cargaPonderacion->find($id);
-        $padre= CargaPonderacion::where('tiene_detalle',1)->pluck('name','id');
-        $ponderaciones=Ponderacion::pluck('name','id');
-        
-        $padre->prepend('Seleccionar opcion','0');
-        return view('cargaPonderacions.edit', compact('cargaPonderacion','ponderaciones','padre'))
-                        ->with('list', CargaPonderacion::getListFromAllRelationApps());
+        $padre = CargaPonderacion::where('tiene_detalle', 1)->pluck('name', 'id');
+        $ponderaciones = Ponderacion::pluck('name', 'id');
+        //dd($cargaPonderacion);
+        $padre->prepend('Seleccionar opcion', '0');
+        return view('cargaPonderacions.edit', compact('cargaPonderacion', 'ponderaciones', 'padre'))
+            ->with('list', CargaPonderacion::getListFromAllRelationApps());
     }
 
     /**
@@ -95,10 +106,11 @@ class CargaPonderacionsController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function duplicate($id, CargaPonderacion $cargaPonderacion) {
+    public function duplicate($id, CargaPonderacion $cargaPonderacion)
+    {
         $cargaPonderacion = $cargaPonderacion->find($id);
         return view('cargaPonderacions.duplicate', compact('cargaPonderacion'))
-                        ->with('list', CargaPonderacion::getListFromAllRelationApps());
+            ->with('list', CargaPonderacion::getListFromAllRelationApps());
     }
 
     /**
@@ -108,13 +120,19 @@ class CargaPonderacionsController extends Controller {
      * @param Request $request
      * @return Response
      */
-    public function update($id, CargaPonderacion $cargaPonderacion, updateCargaPonderacion $request) {
+    public function update($id, CargaPonderacion $cargaPonderacion, updateCargaPonderacion $request)
+    {
         $input = $request->all();
         $input['usu_mod_id'] = Auth::user()->id;
-        if(isset($input['tiene_detalle'])){
-            $input['tiene_detalle']=1;
-        }else{
-            $input['tiene_detalle']=0;
+        if (isset($input['tiene_detalle'])) {
+            $input['tiene_detalle'] = 1;
+        } else {
+            $input['tiene_detalle'] = 0;
+        }
+        if (isset($input['bnd_activo'])) {
+            $input['bnd_activo'] = 1;
+        } else {
+            $input['bnd_activo'] = 0;
         }
         //update data
         $cargaPonderacion = $cargaPonderacion->find($id);
@@ -129,14 +147,16 @@ class CargaPonderacionsController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id, CargaPonderacion $cargaPonderacion) {
+    public function destroy($id, CargaPonderacion $cargaPonderacion)
+    {
         $cargaPonderacion = $cargaPonderacion->find($id);
         $cargaPonderacion->delete();
 
         return redirect()->route('cargaPonderacions.index')->with('message', 'Registro Borrado.');
     }
 
-    public function getCmbCarga(Request $request) {
+    public function getCmbCarga(Request $request)
+    {
         if ($request->ajax()) {
             //dd($request->all());
             $ponderacion = $request->get('ponderacion_id');
@@ -144,21 +164,25 @@ class CargaPonderacionsController extends Controller {
 
             $final = array();
             $r = DB::table('carga_ponderacions as cp')
-                    ->select('cp.id', 'cp.name')
-                    ->where('cp.ponderacion_id', '=', $ponderacion)
-                    ->where('cp.id', '>', '0')
-                    ->get();
+                ->select('cp.id', 'cp.name')
+                ->where('cp.ponderacion_id', '=', $ponderacion)
+                ->where('cp.id', '>', '0')
+                ->get();
             //dd($r);
             if (isset($carga_ponderacion) and $carga_ponderacion <> 0) {
                 foreach ($r as $r1) {
                     if ($r1->id == $carga_ponderacion) {
-                        array_push($final, array('id' => $r1->id,
+                        array_push($final, array(
+                            'id' => $r1->id,
                             'name' => $r1->name,
-                            'selectec' => 'Selected'));
+                            'selectec' => 'Selected'
+                        ));
                     } else {
-                        array_push($final, array('id' => $r1->id,
+                        array_push($final, array(
+                            'id' => $r1->id,
                             'name' => $r1->name,
-                            'selectec' => ''));
+                            'selectec' => ''
+                        ));
                     }
                 }
                 return $final;
@@ -167,5 +191,4 @@ class CargaPonderacionsController extends Controller {
             }
         }
     }
-
 }

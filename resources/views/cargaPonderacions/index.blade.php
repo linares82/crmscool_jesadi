@@ -139,6 +139,7 @@
                             <th>@include('CrudDscaffold::getOrderlink', ['column' => 'ponderacion_id', 'title' => 'PONDERACION'])</th>
                         <th>@include('CrudDscaffold::getOrderlink', ['column' => 'name', 'title' => 'NOMBRE'])</th>
                         <th>@include('CrudDscaffold::getOrderlink', ['column' => 'porcentaje', 'title' => 'PORCENTAJE'])</th>
+                        <th>@include('CrudDscaffold::getOrderlink', ['column' => 'bnd_activo', 'title' => 'ACTIVO'])</th>
                         <th>@include('CrudDscaffold::getOrderlink', ['column' => 'tiene_detalle', 'title' => 'TIENE DETALLE'])</th>
                         <th>@include('CrudDscaffold::getOrderlink', ['column' => 'tiene_detalle', 'title' => 'PADRE'])</th>
                             <th class="text-right">OPCIONES</th>
@@ -152,6 +153,13 @@
                                 <td>{{$cargaPonderacion->ponderacion->name}}</td>
                                 <td>{{$cargaPonderacion->name}}</td>
                                 <td>{{$cargaPonderacion->porcentaje}}</td>
+                                <td>
+                                    @if($cargaPonderacion->bnd_activo==1)
+                                    SI
+                                    @else
+                                    NO
+                                    @endif
+                                </td>
                                 <td>
                                     @if($cargaPonderacion->tiene_detalle==1)
                                     SI

@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\CalificacionPonderacion;
 use App\HCalificacion;
 use App\HCalifPonderacion;
+use Auth;
 
 class CalificacionPonderacionObserver
 {
@@ -90,7 +91,7 @@ class CalificacionPonderacionObserver
             $input['calificacion_parcial_anterior'] = $anterior->calificacion_parcial;
             $input['calificacion_parcial_actual'] = $nuevo->calificacion_parcial;
             $input['usu_alta_id'] = $nuevo->usu_alta_id;
-            $input['usu_mod_id'] = $nuevo->usu_mod_id;
+            $input['usu_mod_id'] = Auth::user()->id;
             HCalificacion::create($input);
         }
     }

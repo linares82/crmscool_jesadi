@@ -13,6 +13,7 @@ return array(
     'AddAutFieldsToHistoriaClientesTable' => $baseDir . '/database/migrations/2019_11_13_134936_add_aut_fields_to_historia_clientes_table.php',
     'AddBecaPorcentajeClientesTable' => $baseDir . '/database/migrations/2018_05_07_114940_add_beca_porcentaje_clientes_table.php',
     'AddBecadoBndCajasTable' => $baseDir . '/database/migrations/2018_11_01_133610_add_becado_bnd_cajas_table.php',
+    'AddBndActivoToCargaPonderacions' => $baseDir . '/database/migrations/2020_06_10_092359_add_bnd_activo_to_carga_ponderacions.php',
     'AddBndAplicarBecaCajaConceptoTable' => $baseDir . '/database/migrations/2019_02_25_115155_add_bnd_aplicar_beca_caja_concepto_table.php',
     'AddBndBecaCombinacionClientesTable' => $baseDir . '/database/migrations/2019_05_27_162240_add_bnd_beca_combinacion_clientes_table.php',
     'AddBndCortoToNivelsTable' => $baseDir . '/database/migrations/2020_02_24_103913_add_bnd_corto_to_nivels_table.php',

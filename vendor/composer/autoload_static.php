@@ -766,6 +766,7 @@ class ComposerStaticInit94ee770e675e3957b9a5767755ac4657
         'AddAutFieldsToHistoriaClientesTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_13_134936_add_aut_fields_to_historia_clientes_table.php',
         'AddBecaPorcentajeClientesTable' => __DIR__ . '/../..' . '/database/migrations/2018_05_07_114940_add_beca_porcentaje_clientes_table.php',
         'AddBecadoBndCajasTable' => __DIR__ . '/../..' . '/database/migrations/2018_11_01_133610_add_becado_bnd_cajas_table.php',
+        'AddBndActivoToCargaPonderacions' => __DIR__ . '/../..' . '/database/migrations/2020_06_10_092359_add_bnd_activo_to_carga_ponderacions.php',
         'AddBndAplicarBecaCajaConceptoTable' => __DIR__ . '/../..' . '/database/migrations/2019_02_25_115155_add_bnd_aplicar_beca_caja_concepto_table.php',
         'AddBndBecaCombinacionClientesTable' => __DIR__ . '/../..' . '/database/migrations/2019_05_27_162240_add_bnd_beca_combinacion_clientes_table.php',
         'AddBndCortoToNivelsTable' => __DIR__ . '/../..' . '/database/migrations/2020_02_24_103913_add_bnd_corto_to_nivels_table.php',

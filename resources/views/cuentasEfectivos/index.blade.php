@@ -163,7 +163,6 @@
                             <th>@include('plantillas.getOrderLink', ['column' => 'id', 'title' => 'ID'])</th>
                             <th>@include('CrudDscaffold::getOrderlink', ['column' => 'name', 'title' => 'NOMBRE'])</th>
                         <th>@include('CrudDscaffold::getOrderlink', ['column' => 'clabe', 'title' => 'CLABE'])</th>
-                        <th>@include('CrudDscaffold::getOrderlink', ['column' => 'no_cuenta', 'title' => 'NO. CUENTA'])</th>
                         <th>@include('CrudDscaffold::getOrderlink', ['column' => 'saldo_inicial', 'title' => 'SALDO INICIAL'])</th>
                         <th>@include('CrudDscaffold::getOrderlink', ['column' => 'fecha_saldo_inicial', 'title' => 'FECHA SALDO INICIAL'])</th>
                         <th>@include('CrudDscaffold::getOrderlink', ['column' => 'saldo_caculado', 'title' => 'SALDO CALCULADO'])</th>
@@ -197,7 +196,6 @@
                                 <td><a href="{{ route('cuentasEfectivos.show', $cuentasEfectivo->id) }}">{{$cuentasEfectivo->id}}</a></td>
                                 <td>{{$cuentasEfectivo->name}}</td>
                                 <td>{{$cuentasEfectivo->clabe}}</td>
-                                <td>{{$cuentasEfectivo->no_cuenta}}</td>
                                 <td>{{$cuentasEfectivo->saldo_inicial}}</td>
                                 <td>{{$cuentasEfectivo->fecha_saldo_inicial}}</td>
                                 <td>{{$cuentasEfectivo->saldo_actualizado}}</td>

@@ -1851,4 +1851,123 @@ class ClientesController extends Controller
 
         return view('clientes.reportes.comprobateEstudiosR', compact('cliente', 'inscripcion', 'token', 'foto'));
     }
+
+
+
+    public function apiStore(Request $request)
+    {
+
+        $id = 0;
+        $input = $request->all();
+        $empleado = Empleado::where('mail_empresa', $input['mail_empleado_asignado'])->first();
+        //dd($input);
+        //$empleado=Empleado::find($request->input('empleado_id'));
+        //$input['plantelplantel_id']=$empleado->plantel->id;
+        $input['usu_alta_id'] = 1;
+        $input['usu_mod_id'] = 1;
+        $input['paise_id'] = 22;
+        $input['st_cliente_id'] = 1;
+        $input['ofertum_id'] = 0;
+        $input['empleado_id'] = $empleado->id;
+        //$input['especialidad_id'] = 0;
+        //$input['nivel_id'] = 0;
+        //$input['grado_id'] = 0;
+        //$input['turno_id'] = 0;
+        //$input['st_cliente_id']=1;
+        $input['especialidad2_id'] = 0;
+        $input['diplomado_id'] = 0;
+        $input['subdiplomado_id'] = 0;
+        $input['turno2_id'] = 0;
+        $input['especialidad3_id'] = 0;
+        $input['curso_id'] = 0;
+        $input['subcurso_id'] = 0;
+        $input['turno3_id'] = 0;
+        $input['especialidad4_id'] = 0;
+        $input['otro_id'] = 0;
+        $input['subotro_id'] = 0;
+        $input['turno4_id'] = 0;
+        //$input['grado_id'] = 0;
+        $input['turno_id'] = 0;
+        $input['paise_id'] = 22;
+
+        $input['turno_id'] = 0;
+        if (is_null($input['ape_materno'])) {
+            $input['ape_materno'] = " ";
+        }
+        if (is_null($input['nombre2'])) {
+            $input['nombre2'] = " ";
+        }
+        if (is_null($input['matricula'])) {
+            $input['matricula'] = " ";
+        }
+        $param = Param::where('llave', '=', 'msj_text')->first();
+        if ($input['cve_cliente'] == "") {
+            //$input['cve_cliente'] = 'Codigo: ' . substr(Hash::make(rand(0, 1000)), 2, 8) . $param->valor;
+            $input['cve_cliente'] = $param->valor;
+        }
+        if (!isset($input['promociones'])) {
+            $input['promociones'] = 0;
+        } else {
+            $input['promociones'] = 1;
+        }
+        if (!isset($input['promo_cel'])) {
+            $input['promo_cel'] = 0;
+        } else {
+            $input['promo_cel'] = 1;
+        }
+        if (!isset($input['promo_correo'])) {
+            $input['promo_correo'] = 0;
+        } else {
+            $input['promo_correo'] = 1;
+        }
+        if (!isset($input['celular_confirmado'])) {
+            $input['celular_confirmado'] = 0;
+        } else {
+            $input['celular_confirmado'] = 1;
+        }
+        if (!isset($input['extranjero'])) {
+            $input['extranjero'] = 0;
+        } else {
+            $input['extranjero'] = 1;
+        }
+        if (!isset($input['bnd_beca'])) {
+            $input['bnd_beca'] = 0;
+        } else {
+            $input['bnd_beca'] = 1;
+        }
+        if (!isset($input['bnd_regingreso'])) {
+            $input['bnd_regingreso'] = 0;
+        } else {
+            $input['bnd_reingreso'] = 1;
+        }
+        //dd($input);
+        //create data
+        try {
+            //dd($input);
+            $c = Cliente::create($input);
+            $id = $c->id;
+            $input_seguimiento['cliente_id'] = $c->id;
+            $input_seguimiento['st_seguimiento_id'] = 1;
+            $input_seguimiento['mes'] = date('m');
+            $input_seguimiento['usu_alta_id'] = 1;
+            $input_seguimiento['usu_mod_id'] = 1;
+            $s = Seguimiento::create($input_seguimiento);
+            $avisos = AvisosInicio::get();
+            foreach ($avisos as $a) {
+                $aviso = new Aviso;
+                $aviso->seguimiento_id = $s->id;
+                $aviso->asunto_id = $a->asunto_id;
+                $aviso->detalle = $a->detalle;
+                $aviso->fecha = date('Y-m-j', strtotime('+' . $a->dias_despues . ' day', strtotime(date('Y-m-j'))));
+                $aviso->activo = 1;
+                $aviso->usu_alta_id = 1;
+                $aviso->usu_mod_id = 1;
+                $aviso->save();
+            }
+        } catch (\PDOException $e) {
+            //dd($e);
+            return response()->json(['msj' => 'Fallo, exception: ' . $e->getMessage()]);
+        }
+        return response()->json(['id_cliente' => $c->id]);
+    }
 }

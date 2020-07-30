@@ -295,9 +295,13 @@ class HomeController extends Controller
         $encabezado = array();
         $encabezado[0] = 'Empleado';
         $estatus = StSeguimiento::where('id', '>', 0)->get();
-        $empleados = Empleado::where('plantel_id', '=', $filtros['plantel_f'])
-            ->where('puesto_id', '=', 2)
-            ->where('id', '>', 0)
+        $empleados = Empleado::select('empleados.*')
+            ->where('c.plantel_id', '=', $filtros['plantel_f'])
+            ->join('clientes as c', 'c.empleado_id','=','empleados.id')
+            ->where('empleados.puesto_id', '=', 2)
+            ->whereIn('empleados.st_empleado_id', array(1,9))
+            ->where('empleados.id', '>', 0)
+            ->distinct()
             ->get();
         //dd($empleados->toArray());
         $i = 1;

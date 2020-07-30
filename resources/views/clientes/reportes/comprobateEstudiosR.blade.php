@@ -42,6 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <img src="{{asset('storage/especialidads/'.$inscripcion->especialidad->imagen)}}" alt="Logo" height="25%" width="25%" > 
                 </td>
                 <td align="right"> 
+                    Fecha Emisión:{{ Date('dd-mm-YY') }}
                     <img src="{{asset('imagenes/clientes/'.$cliente->id."/".$foto)}}" alt="Foto" height="25%" width="25%" > </td>
                 </td>
             </tr>
@@ -77,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div align="center">
             A T E N T A M E N T E. <br>
             <img src="data:image/png;base64, 
-                                {!! base64_encode(QrCode::format('png')->size(100)->generate('Cliente:'.$cliente->id.', Token:'.$token->token)) !!} ">    
+                                {!! base64_encode(QrCode::format('png')->size(100)->generate('Cliente:'.$cliente->id.', RVOE:'.$inscripcion->especialidad->rvoe.', CCT:'.$inscripcion->especialidad->ccte.', Plantel:'.$cliente->plantel->razon.', Token:'.$token->token)) !!} ">    
             <br>
             {{ $cliente->plantel->razon }}
         </div>

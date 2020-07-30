@@ -12,13 +12,14 @@
                         <span class="help-block">{{ $errors->first("clabe") }}</span>
                        @endif
                     </div>
+                <!--
                     <div class="form-group col-md-4 @if($errors->has('no_cuenta')) has-error @endif">
                        <label for="no_cuenta-field">No. Cuenta</label>
                        {!! Form::text("no_cuenta", null, array("class" => "form-control", "id" => "no_cuenta-field")) !!}
                        @if($errors->has("no_cuenta"))
                         <span class="help-block">{{ $errors->first("no_cuenta") }}</span>
                        @endif
-                    </div>
+                    </div>-->
                     <div class="form-group col-md-4 @if($errors->has('fecha_saldo_inicial')) has-error @endif">
                        <label for="fecha_saldo_inicial-field">Fecha Saldo Inicial</label>
                        {!! Form::text("fecha_saldo_inicial", null, array("class" => "form-control", "id" => "fecha_saldo_inicial-field")) !!}

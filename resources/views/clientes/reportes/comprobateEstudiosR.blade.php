@@ -42,7 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <img src="{{asset('storage/especialidads/'.$inscripcion->especialidad->imagen)}}" alt="Logo" height="25%" width="25%" > 
                 </td>
                 <td align="right"> 
-                    Fecha Emisión:{{ Date('dd-mm-YY') }}
+                    Fecha Emisión:{{ Date('d-m-Y') }}
                     <img src="{{asset('imagenes/clientes/'.$cliente->id."/".$foto)}}" alt="Foto" height="25%" width="25%" > </td>
                 </td>
             </tr>

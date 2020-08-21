@@ -279,7 +279,14 @@ class CajasController extends Controller
         //dd($data);
         $empleado = Empleado::where('user_id', '=', Auth::user()->id)->first();
         //dd($empleado->toArray());
-        $caja = Caja::where('consecutivo', '=', $data['consecutivo'])->where('plantel_id', '=', $data['plantel_id'])->first();
+        $caja_aux = Caja::where('consecutivo', '=', $data['consecutivo']);
+        if (isset($datos['plantel_id']) and $datos['plantel_id'] <> 0) {
+            $caja_aux->where('plantel_id', $datos['plantel_id']);
+        }
+        if (isset($datos['cliente_caja']) and $datos['cliente_caja'] <> "") {
+            $caja_aux->where('cliente_id', $datos['cliente_caja']);
+        }
+        $caja = $caja_aux->first();
         if (!is_object($caja)) {
             Session::flash('msj', 'Caja no existe');
             return view('cajas.caja')->with('list', Caja::getListFromAllRelationApps())->with('list1', CajaLn::getListFromAllRelationApps());

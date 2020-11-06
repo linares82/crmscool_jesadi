@@ -280,13 +280,14 @@ class CajasController extends Controller
         $empleado = Empleado::where('user_id', '=', Auth::user()->id)->first();
         //dd($empleado->toArray());
         $caja_aux = Caja::where('consecutivo', '=', $data['consecutivo']);
-        if (isset($datos['plantel_id']) and $datos['plantel_id'] <> 0) {
-            $caja_aux->where('plantel_id', $datos['plantel_id']);
+        if (isset($data['plantel_id']) and $data['plantel_id'] <> 0) {
+            $caja_aux->where('plantel_id', $data['plantel_id']);
         }
-        if (isset($datos['cliente_caja']) and $datos['cliente_caja'] <> "") {
-            $caja_aux->where('cliente_id', $datos['cliente_caja']);
+        if (isset($data['cliente_caja']) and $data['cliente_caja'] <> "") {
+            $caja_aux->where('cliente_id', $data['cliente_caja']);
         }
         $caja = $caja_aux->first();
+
         if (!is_object($caja)) {
             Session::flash('msj', 'Caja no existe');
             return view('cajas.caja')->with('list', Caja::getListFromAllRelationApps())->with('list1', CajaLn::getListFromAllRelationApps());
@@ -313,7 +314,7 @@ class CajasController extends Controller
         }
         if (is_object($caja) and array_search($caja->plantel_id, $planteles) <> false) { //$caja->plantel_id == $empleado->plantel_id) {
             //Apliacion de recargos
-            if ($caja->st_caja_id == 0 and $caja->descuento == 0) {
+            if ($caja->st_caja_id == 0 and $caja->descuento == strval(0)) {
                 //dd($caja->st_caja_id);
                 $recargo = 0;
             }

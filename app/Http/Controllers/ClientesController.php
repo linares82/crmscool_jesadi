@@ -357,11 +357,11 @@ class ClientesController extends Controller
             $empleados = Empleado::select('id', DB::raw('concat(nombre," ",ape_paterno," ",ape_materno) as name'))
                 //->where('plantel_id', '=', $e->plantel_id)
                 ->whereIn('plantel_id', '=', $planteles)
-                ->where('puesto_id', '=', 2)
+                ->whereIn('puesto_id', array(2, 6))
                 ->pluck('name', 'id');
         } else {
             $empleados = Empleado::select('id', DB::raw('concat(nombre," ",ape_paterno," ",ape_materno) as name'))
-                ->where('puesto_id', '=', 2)
+                ->whereIn('puesto_id', array(2, 6))
                 ->pluck('name', 'id');
         }
         $empleados = $empleados->reverse();
@@ -1391,10 +1391,21 @@ class ClientesController extends Controller
             'clientes.tel_cel',
             DB::raw('if(clientes.celular_confirmado=1,"SI","NO") as celular_confirmado'),
             'clientes.mail',
-            DB::raw('if(clientes.correo_confirmado=1,"SI","NO") as correo_confirmado')
+            DB::raw('if(clientes.correo_confirmado=1,"SI","NO") as correo_confirmado'),
+            'esp.name as especialidad',
+            'n.name as  nivel',
+            'g.name as grado',
+            'stc.name as st_cliente',
+            'sts.name as st_seguimiento'
         )
             ->join('plantels as p', 'p.id', '=', 'clientes.plantel_id')
             ->join('empleados as e', 'e.id', '=', 'clientes.empleado_id')
+            ->join('seguimientos as s', 's.cliente_id', '=', 'clientes.id')
+            ->join('st_seguimientos as sts', 'sts.id', '=', 's.st_seguimiento_id')
+            ->join('st_clientes as stc', 'stc.id', '=', 'clientes.st_cliente_id')
+            ->join('especialidads as esp', 'esp.id', '=', 'clientes.especialidad_id')
+            ->join('nivels as n', 'n.id', '=', 'clientes.nivel_id')
+            ->join('grados as g', 'g.id', '=', 'clientes.grado_id')
             ->whereBetween('clientes.plantel_id', [$data['plantel_f'], $data['plantel_t']])
             ->whereDate('clientes.created_at', '>', date_format(date_create($data['fecha_f']), 'Y/m/d H:i:s'))
             ->whereDate('clientes.created_at', '<', date_format(date_create($data['fecha_t']), 'Y/m/d H:i:s'))
@@ -1407,6 +1418,11 @@ class ClientesController extends Controller
             'ape_paterno' => 'A. PATERNO',
             'ape_materno' => 'A. MATERNO',
             'plantel' => 'PLANTEL',
+            'especialidad' => 'ESPECIALIDAD',
+            'nivel' => 'NIVEL',
+            'grado' => 'GRADO',
+            'st_cliente' => 'ESTATUS CLIENTE',
+            'st_seguimiento' => 'ESTATUS SEGUIMIENTO',
             'empleado' => 'EMPLEADO',
             'tel_cel' => 'CELULAR',
             'celular_confirmado' => 'CELULAR CONFIRMADO',

@@ -51,7 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </tr>
             @if($inscripcion->especialidad->rvoe<>"")
             <tr>
-                <td align="center">ACUERDOS  DE  DGCFT  No. {{ optional($inscripcion->especialidad)->rvoe }} DE FECHA {{ $vencimiento->format('d-m-Y') }} </td>
+                <td align="center">ACUERDOS  DE  DGCFT  No. {{ optional($inscripcion->especialidad)->rvoe }} DE FECHA {{ optional($vencimiento)->format('d-m-Y') }} </td>
             </tr>
             @endif
             <TR>

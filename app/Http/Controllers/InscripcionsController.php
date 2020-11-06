@@ -318,19 +318,23 @@ class InscripcionsController extends Controller
                 $posicion = $key;
                 $i = Inscripcion::find($id);
                 if (
-                    isset($input['activar-field']) and
+                    isset($input['activar']) and
+                    isset($input['plantel_to']) and
                     isset($input['especialidad_to']) and
                     isset($input['nivel_to']) and
                     isset($input['grado_to'])
                 ) {
-                    $i->especialidad = $input['especialidad_to'];
-                    $i->nivel = $input['nivel_to'];
-                    $i->grado = $input['grado_to'];
+                    $i->plantel_id = $input['plantel_to'];
+                    $i->especialidad_id = $input['especialidad_to'];
+                    $i->nivel_id = $input['nivel_to'];
+                    $i->grado_id = $input['grado_to'];
                 }
+                
                 //if($i->grupo_id<>$input['grupo_to'] and $i->lectivo_id<>$input['lectivo_to'] and $i->periodo_estudio_id<>$input['periodo_estudios_to']){
                 $i->grupo_id = $input['grupo_to'];
                 $i->lectivo_id = $input['lectivo_to'];
                 $i->periodo_estudio_id = $input['periodo_estudios_to'];
+                //dd($i->toArray());
                 $i->save();
                 if (isset($input['registrar_materias'])) {
                     $this->registrarMaterias($id);

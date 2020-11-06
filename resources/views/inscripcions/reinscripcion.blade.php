@@ -130,7 +130,14 @@
                             <span class="help-block">{{ $errors->first("activar") }}</span>
                             @endif
                         </div>
-                        <div class="form-group col-md-4 @if($errors->has('especialidad_to')) has-error @endif">
+                        <div class="form-group col-md-3 @if($errors->has('plantel_to')) has-error @endif">
+                            <label for="plantel_to-field">Plantel</label>
+                            {!! Form::select("plantel_to", $list["Plantel"], isset($input['plantel_to']) ? $input['plantel_to'] : null, array("class" => "form-control select_seguridad", "id" => "plantel_to-field")) !!}
+                            @if($errors->has("plantel_to"))
+                                <span class="help-block">{{ $errors->first("plantel_to") }}</span>
+                            @endif
+                            </div>
+                        <div class="form-group col-md-3 @if($errors->has('especialidad_to')) has-error @endif">
                         <label for="especialidad_to-field">Especialidad</label>
                         {!! Form::select("especialidad_to", $list["Especialidad"], null, array("class" => "form-control select_seguridad", "id" => "especialidad_to-field")) !!}
                         <div id='loading10' style='display: none'><img src="{{ asset('images/ajax-loader.gif') }}" title="Enviando" /></div> 
@@ -138,7 +145,7 @@
                             <span class="help-block">{{ $errors->first("especialidad_to") }}</span>
                         @endif
                         </div>
-                        <div class="form-group col-md-4 @if($errors->has('nivel_to')) has-error @endif">
+                        <div class="form-group col-md-2 @if($errors->has('nivel_to')) has-error @endif">
                         <label for="nivel_to-field">Nivel</label>
                         {!! Form::select("nivel_to", $list["Nivel"], null, array("class" => "form-control select_seguridad", "id" => "nivel_to-field")) !!}
                         <div id='loading11' style='display: none'><img src="{{ asset('images/ajax-loader.gif') }}" title="Enviando" /></div> 
@@ -259,6 +266,7 @@
     });
       
       function Desactivar(){
+        $('#plantel_to-field').prop("disabled", true);
           $('#especialidad_to-field').prop("disabled", true);
           $('#nivel_to-field').prop("disabled", true);
           $('#grado_to-field').prop("disabled", true);
@@ -266,6 +274,7 @@
       }
       
       function Activar(){
+        $('#plantel_to-field').prop("disabled", false);
           $('#especialidad_to-field').prop("disabled", false);
           $('#nivel_to-field').prop("disabled", false);
           $('#grado_to-field').prop("disabled", false);
@@ -284,7 +293,6 @@
 
       $('#plantel_id-field').change(function(){
           getCmbGrupo();
-          getCmbGrupoTo();
       });
       
       $('#grupo_to-field').change(function(){
@@ -374,7 +382,7 @@
               $.ajax({
                   url: '{{ route("grupos.getCmbGrupo") }}',
                   type: 'GET',
-                  data: "plantel_id=" + $('#plantel_id-field option:selected').val() + "&grupo_id=" + $('#grupo_to-field option:selected').val() + "",
+                  data: "plantel_id=" + $('#plantel_to-field option:selected').val() + "&grupo_id=" + $('#grupo_to-field option:selected').val() + "",
                   dataType: 'json',
                   beforeSend : function(){$("#loading13").show();},
                   complete : function(){$("#loading13").hide();},
@@ -396,7 +404,10 @@
       }
       $('#plantel_id-field').change(function(){
           getCmbEspecialidad();
+      });
+      $('#plantel_to-field').change(function(){
           getCmbEspecialidadTo();
+          getCmbGrupoTo();
       });
       function getCmbEspecialidad(){
           //var $example = $("#especialidad_id-field").select2();
@@ -430,7 +441,7 @@
               $.ajax({
                   url: '{{ route("especialidads.getCmbEspecialidad") }}',
                   type: 'GET',
-                  data: "plantel_id=" + $('#plantel_id-field option:selected').val() + "&especialidad_id=" + $('#especialidad_to-field option:selected').val() + "",
+                  data: "plantel_id=" + $('#plantel_to-field option:selected').val() + "&especialidad_id=" + $('#especialidad_to-field option:selected').val() + "",
                   dataType: 'json',
                   beforeSend : function(){$("#loading10").show();},
                   complete : function(){$("#loading10").hide();},
@@ -487,7 +498,7 @@
               $.ajax({
                   url: '{{ route("nivels.getCmbNivels") }}',
                   type: 'GET',
-                  data: "plantel_id=" + $('#plantel_id-field option:selected').val() + "&especialidad_id=" + $('#especialidad_to-field option:selected').val() + "&nivel_id=" + $('#nivel_to-field option:selected').val() + "",
+                  data: "plantel_id=" + $('#plantel_to-field option:selected').val() + "&especialidad_id=" + $('#especialidad_to-field option:selected').val() + "&nivel_id=" + $('#nivel_to-field option:selected').val() + "",
                   dataType: 'json',
                   beforeSend : function(){$("#loading11").show();},
                   complete : function(){$("#loading11").hide();},
@@ -546,7 +557,7 @@
               $.ajax({
                   url: '{{ route("grados.getCmbGrados") }}',
                   type: 'GET',
-                  data: "plantel_id=" + $('#plantel_id-field option:selected').val() + "&especialidad_id=" + $('#especialidad_to-field option:selected').val() + "&nivel_id=" + $('#nivel_to-field option:selected').val() + "&grado_id=" + $('#grado_to-field option:selected').val() +"",
+                  data: "plantel_id=" + $('#plantel_to-field option:selected').val() + "&especialidad_id=" + $('#especialidad_to-field option:selected').val() + "&nivel_id=" + $('#nivel_to-field option:selected').val() + "&grado_id=" + $('#grado_to-field option:selected').val() +"",
                   dataType: 'json',
                   beforeSend : function(){$("#loading12").show();},
                   complete : function(){$("#loading12").hide();},

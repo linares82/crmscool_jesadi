@@ -4448,6 +4448,14 @@ Route::post(
     )
 )->middleware('auth');
 Route::get(
+    '/inscripcions/listaComplemento',
+    array(
+        'as' => 'inscripcions.listaComplemento',
+        'middleware' => 'permission:inscripcions.lista',
+        'uses' => 'InscripcionsController@listaComplemento'
+    )
+)->middleware('auth');
+Route::get(
     '/inscripcions/listaCalificaciones',
     array(
         'as' => 'inscripcions.listaCalificaciones',

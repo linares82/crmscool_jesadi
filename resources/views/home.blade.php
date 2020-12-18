@@ -65,6 +65,11 @@
     </div>
     @endif
 
+    @if (Auth::user()->can('autorizacionBecas.aut_caja_plantel') or 
+    Auth::user()->can('autorizacionBecas.aut_dir_plantel') or
+    Auth::user()->can('autorizacionBecas.aut_caja_corp') or 
+    Auth::user()->can('autorizacionBecas.aut_ser_esc') or 
+    Auth::user()->can('autorizacionBecas.aut_dueno'))
      <div class="form-group col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -123,6 +128,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
     @permission('indicadores_plantels')
     @php

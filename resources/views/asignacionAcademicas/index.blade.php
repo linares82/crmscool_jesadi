@@ -180,7 +180,9 @@
                                 <td>{{$asignacionAcademica->grupo->name}}</td>
                                 <td>{{$asignacionAcademica->lectivo->name}}</td>
                                 <td class="text-right">
+                                    @permission('asignacionAcademica.boletasGrupo')
                                     <a class="btn btn-xs btn-default" href="{{ route('asignacionAcademica.boletasGrupo', array('asignacion'=>$asignacionAcademica->id)) }}"><i class=' fa fa-list-alt'></i> Boletas</a>
+                                    @endpermission
                                     @permission('asignacionAcademicas.edit')
                                     <a class="btn btn-xs btn-primary" href="{{ route('asignacionAcademicas.duplicate', $asignacionAcademica->id) }}"><i class="glyphicon glyphicon-duplicate"></i> Duplicar</a>
                                     @endpermission
@@ -196,7 +198,7 @@
                                     <a class="btn btn-xs btn-success" href="{{ route('asistenciaRs.buscar', $asignacionAcademica->id) }}"><i class="glyphicon glyphicon-edit"></i>Asistencias</a>
                                     <a class="btn btn-xs btn-success" href="{{ route('inscripcions.listaMes', array('asignacion'=>$asignacionAcademica->id)) }}" target='_blank'><i class="glyphicon glyphicon-edit"></i>Lista A.</a>
                                     <a class="btn btn-xs btn-success" href="{{ route('inscripcions.lista', array('asignacion'=>$asignacionAcademica->id)) }}" target='_blank'><i class="glyphicon glyphicon-edit"></i>Lista Grupo</a>
-                                    
+                                    <a class="btn btn-xs btn-success" href="{{ route('inscripcions.listaComplemento', array('asignacion'=>$asignacionAcademica->id)) }}" target='_blank'><i class="glyphicon glyphicon-edit"></i>Lista C.</a>
                                     @endpermission
                                     @permission('hacademicas.calificacionGrupo')
                                     <a class="btn btn-xs btn-info" href="{{ route('hacademicas.calificacionGrupo', ['asignacion'=>$asignacionAcademica->id]) }}"><i class="glyphicon glyphicon-edit"></i>Calificaciones</a>

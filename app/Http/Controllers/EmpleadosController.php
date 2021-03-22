@@ -430,6 +430,8 @@ class EmpleadosController extends Controller
                 ->where('ep.plantel_id', '=', $plantel)
                 ->where('e.id', '>', '0')
                 ->whereNotIn('st_empleado_id', array(3, 2, 10))
+                ->whereNull('e.deleted_at')
+                ->orderBy('e.id')
                 ->get();
 
             if (isset($empleado) and $empleado <> 0) {

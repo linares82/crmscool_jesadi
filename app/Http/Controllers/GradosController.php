@@ -190,11 +190,14 @@ class GradosController extends Controller
 
             $final = array();
             $r = DB::table('grados as g')
-                ->join('inscripcions as i', 'i.grado_id', '=', 'g.id')
-                ->join('clientes as c', 'i.cliente_id', '=', 'c.id')
+                //->join('inscripcions as i', 'i.grado_id', '=', 'g.id')
+                ->join('hacademicas as h', 'h.grado_id', '=', 'g.id')
+                ->join('clientes as c', 'h.cliente_id', '=', 'c.id')
                 ->select('g.id', 'g.name')
                 ->where('c.id', '=', $cliente)
                 ->where('g.id', '>', '0')
+                ->distinct()
+                ->whereNull('h.deleted_at')
                 ->get();
             //dd($r);
             if (isset($grado) and $grado <> 0) {

@@ -22,7 +22,7 @@
         <table class="table table-condensed table-striped">
             <thead>
                 <tr>
-                  <th>id</th><th>Cliente</th><!--<th>Becado</th>--><th>Caja</th><th>Cobrado Por</th><!--<th>Estatus</th>--><th>Fecha Pago</th><th>Fecha Creacion</th><th>Concepto</th><th>Monto Pago</th><th>Forma Pago</th><th>Beca</th>
+                  <th>id</th><th>Cliente</th><!--<th>Becado</th>--><th>Caja</th><th>Cobrado Por</th><!--<th>Estatus</th>--><th>Fecha Pago</th><th>Fecha Creacion</th><th>Concepto</th><th>Monto Pago</th><th>Forma Pago</th><!--<th>Beca</th>-->
                 </tr> 
             </thead>
             <tbody>
@@ -45,15 +45,15 @@
                     ->orderBy('autorizacion_becas.id','Desc')
                     ->where('autorizacion_becas.st_beca_id',4)
                     ->whereNull('deleted_at')
-                    ->whereNotNull('lectivo_id')
+                    //->whereNotNull('lectivo_id')
                     ->take(1)
                     ->first();
                 
                 if(!is_null($beca)){
                   //Log::info($beca->id."-*-".$beca->lectivo->inicio."-*-".$beca->lectivo->fin);
-                    $fecha_inicio=Carbon\Carbon::createFromFormat('Y-m-d',$beca->lectivo->inicio);
-                    $fecha_fin=Carbon\Carbon::createFromFormat('Y-m-d',$beca->lectivo->fin);
-                    $fecha_adeudo=Carbon\Carbon::createFromFormat('Y-m-d',$registro->fecha_pago);
+                    //$fecha_inicio=Carbon\Carbon::createFromFormat('Y-m-d',$beca->lectivo->inicio);
+                    //$fecha_fin=Carbon\Carbon::createFromFormat('Y-m-d',$beca->lectivo->fin);
+                    //$fecha_adeudo=Carbon\Carbon::createFromFormat('Y-m-d',$registro->fecha_pago);
                 }
                 @endphp
                 
@@ -96,15 +96,16 @@
                         </td>
                         <td style="text-align:right;">{{number_format($registro->monto_pago,2)}}</td>
                         <td>{{$registro->forma_pago}}</td>
-                        @if(!is_null($beca)) 
-                        @if($fecha_adeudo->greaterThanOrEqualTo($fecha_inicio) and $fecha_adeudo->lessThanOrEqualTo($fecha_fin))
+                        <!--@@if(!is_null($beca)) 
+                        @@if($fecha_adeudo->greaterThanOrEqualTo($fecha_inicio) and $fecha_adeudo->lessThanOrEqualTo($fecha_fin))
                         <td>{{$beca->monto_mensualidad}}</td>
-                        @else
+                        @@else
                         <td></td>
-                        @endif
-                        @else
+                        @@endif
+                        @@else
                         <td></td>
-                        @endif
+                        @@endif
+			-->
                     </tr>
                     
                     <?php 

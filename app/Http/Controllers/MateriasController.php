@@ -178,12 +178,13 @@ class MateriasController extends Controller {
             $final = array();
             $r = DB::table('materia as m')
                     ->join('hacademicas as h', 'h.materium_id', '=', 'm.id')
-                    ->join('inscripcions as i', 'i.id', '=', 'h.inscripcion_id')
-                    ->join('clientes as c', 'c.id', '=', 'i.cliente_id')
+                    //->join('inscripcions as i', 'i.id', '=', 'h.inscripcion_id')
+                    ->join('clientes as c', 'c.id', '=', 'h.cliente_id')
                     ->select('m.id', 'm.name')
-                    ->whereColumn('m.plantel_id', 'i.plantel_id')
+                    ->whereColumn('m.plantel_id', 'h.plantel_id')
                     ->where('c.id', '=', $cliente_id)
-                    ->where('i.grado_id', '=', $grado)
+                    //->where('i.grado_id', '=', $grado)
+                    ->where('h.grado_id', '=', $grado)
                     ->where('h.deleted_at', '=', null)
                     ->get();
             //dd($r);

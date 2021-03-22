@@ -360,14 +360,23 @@ class HacademicasController extends Controller
         ) {
             //isset($input['calificacion']) and
             //isset($input['fecha']) )
-            $h = Inscripcion::select('h.id')
+            /*$h = Inscripcion::select('h.id')
                 ->join('clientes as c', 'c.id', '=', 'inscripcions.cliente_id')
                 ->join('hacademicas as h', 'h.inscripcion_id', '=', 'inscripcions.id')
                 ->where('c.id', '=', $input['cliente_id'])
                 ->where('inscripcions.grado_id', '=', $input['grado_id'])
                 ->where('h.materium_id', '=', $input['materium_id'])
                 ->where('h.deleted_at', '=', null)
+                ->first();*/
+            $h = Hacademica::select('hacademicas.id')
+                ->join('clientes as c', 'c.id', '=', 'hacademicas.cliente_id')
+                //->join('hacademicas as h', 'h.inscripcion_id', '=', 'inscripcions.id')
+                ->where('c.id', '=', $input['cliente_id'])
+                ->where('hacademicas.grado_id', '=', $input['grado_id'])
+                ->where('hacademicas.materium_id', '=', $input['materium_id'])
+                ->where('hacademicas.deleted_at', '=', null)
                 ->first();
+
             $calificacion_extraordinaria = Calificacion::where('hacademica_id', $h->id)->where('tpo_examen_id', 2)->first();
 
 
